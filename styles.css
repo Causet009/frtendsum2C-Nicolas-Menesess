@@ -511,6 +511,11 @@ fieldset {
   background: #fff8f4;
 }
 
+fieldset.invalid {
+  border-color: #d9554d;
+  box-shadow: 0 0 0 4px rgba(217, 85, 77, 0.12);
+}
+
 legend {
   font-weight: 700;
   margin-bottom: 0.75rem;
