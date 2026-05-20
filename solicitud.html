@@ -3,16 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Solicitar Reserva | BuenSabor</title>
+    <title>Solicitud de Reserva | BuenSabor</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header class="site-header">
+    <header class="site-header" id="inicio">
       <div class="header-inner">
         <div class="logo">BuenSabor</div>
         <nav class="main-nav">
           <a href="index.html#inicio">Inicio</a>
-          <a href="index.html#menu">Menu</a>
+          <a href="index.html#menu">Menú</a>
           <a href="index.html#catering">Catering</a>
           <a href="index.html#nosotros">Nosotros</a>
           <a class="btn-link" href="solicitud.html">Solicitar</a>
@@ -20,15 +20,353 @@
       </div>
     </header>
 
-    <main class="section section-about">
-      <div class="section-header">
-        <h2>Solicitud de reserva o catering</h2>
-        <p>Esta p�gina se crea como referencia en la Etapa 2 para completar el formulario.</p>
-      </div>
+    <main class="request-page">
+      <section class="section section-form">
+        <div class="section-header">
+          <p class="eyebrow">Formulario de solicitud</p>
+          <h2>Reserva de mesa o servicio de catering</h2>
+          <p>Completa los datos para que BuenSabor prepare una propuesta personalizada para tu evento.</p>
+        </div>
+
+        <form id="requestForm" class="request-form" novalidate>
+          <div class="form-section">
+            <div class="section-title">
+              <span>Sección A</span>
+              <h3>Tipo de solicitud y datos del evento</h3>
+            </div>
+
+            <fieldset>
+              <legend>Tipo de solicitud</legend>
+              <div class="radio-group">
+                <label><input type="radio" name="requestType" value="reserva" checked /> Reserva de mesa en el salón</label>
+                <label><input type="radio" name="requestType" value="catering" /> Servicio de catering externo</label>
+              </div>
+            </fieldset>
+
+            <div class="field-grid">
+              <label class="field">
+                <span>Fecha del evento o reserva</span>
+                <input type="date" name="eventDate" required />
+              </label>
+              <label class="field">
+                <span>Hora de inicio</span>
+                <input type="time" name="eventTime" required />
+              </label>
+            </div>
+
+            <label class="field hidden" id="durationField">
+              <span>Duración estimada del evento</span>
+              <select name="duration">
+                <option value="1">1 hora</option>
+                <option value="2">2 horas</option>
+                <option value="3">3 horas</option>
+                <option value="4">4 horas</option>
+                <option value="5">4 horas o más</option>
+              </select>
+            </label>
+
+            <label class="field hidden" id="eventNameField">
+              <span>Nombre o descripción del evento</span>
+              <input type="text" name="eventName" placeholder="Cumpleaños de 50, Reunión anual de empresa" />
+            </label>
+
+            <label class="field hidden" id="eventTypeField">
+              <span>Tipo de evento</span>
+              <select name="eventType" id="eventTypeSelect">
+                <option value="">Selecciona...</option>
+                <option value="casamiento">Casamiento</option>
+                <option value="cumpleanos">Cumpleaños</option>
+                <option value="corporativo">Evento corporativo</option>
+                <option value="desayuno">Desayuno o coffee break</option>
+                <option value="otro">Otro</option>
+              </select>
+            </label>
+
+            <label class="field hidden" id="eventTypeOtherField">
+              <span>Especifica el tipo de evento</span>
+              <input type="text" name="eventTypeOther" placeholder="Describe el evento" />
+            </label>
+
+            <label class="field hidden" id="eventLocationField">
+              <span>Lugar del evento</span>
+              <input type="text" name="eventLocation" placeholder="Dirección donde se realizará el servicio" />
+            </label>
+          </div>
+
+          <div class="form-section">
+            <div class="section-title">
+              <span>Sección B</span>
+              <h3>Datos de los comensales</h3>
+            </div>
+
+            <div class="field-grid">
+              <label class="field">
+                <span>Cantidad de adultos</span>
+                <input type="number" name="adults" min="1" max="200" value="1" required />
+              </label>
+              <label class="field">
+                <span>Cantidad de menores</span>
+                <input type="number" name="children" min="0" max="50" value="0" />
+              </label>
+            </div>
+
+            <fieldset>
+              <legend>Restricciones alimentarias presentes</legend>
+              <div class="checkbox-grid">
+                <label><input type="checkbox" name="dietary" value="vegetarianos" /> Vegetarianos</label>
+                <label><input type="checkbox" name="dietary" value="veganos" /> Veganos</label>
+                <label><input type="checkbox" name="dietary" value="sin_tacc" /> Sin TACC</label>
+                <label><input type="checkbox" name="dietary" value="sin_lactosa" /> Sin lactosa</label>
+                <label><input type="checkbox" name="dietary" value="alergias" /> Alergias a frutos secos</label>
+                <label><input type="checkbox" name="dietary" value="otras" id="dietOtherCheckbox" /> Otras</label>
+              </div>
+            </fieldset>
+
+            <label class="field hidden" id="dietOtherField">
+              <span>Detalle otras restricciones</span>
+              <textarea name="dietOtherDetails" maxlength="200" rows="3" placeholder="Describe otras restricciones"></textarea>
+              <small class="counter" id="dietOtherCounter">0 / 200</small>
+            </label>
+
+            <label class="field checkbox-field">
+              <input type="checkbox" name="kidsMenu" id="kidsMenuCheckbox" />
+              <span>El grupo necesita menú infantil</span>
+            </label>
+
+            <label class="field hidden" id="kidsMenuCountField">
+              <span>Cantidad de menús infantiles</span>
+              <input type="number" name="kidsMenuCount" min="1" max="50" value="1" />
+            </label>
+          </div>
+
+          <div class="form-section">
+            <div class="section-title">
+              <span>Sección C</span>
+              <h3>Datos del cliente y preferencias</h3>
+            </div>
+
+            <div class="field-grid">
+              <label class="field">
+                <span>Nombre completo</span>
+                <input type="text" name="fullName" required />
+              </label>
+              <label class="field">
+                <span>Correo electrónico</span>
+                <input type="email" name="email" required />
+              </label>
+            </div>
+
+            <div class="field-grid">
+              <label class="field">
+                <span>Confirmar correo electrónico</span>
+                <input type="email" name="emailConfirm" required />
+              </label>
+              <label class="field">
+                <span>Teléfono de contacto</span>
+                <input type="tel" name="phone" placeholder="Ej. 11 1234 5678" required />
+              </label>
+            </div>
+
+            <label class="field">
+              <span>Tipo de menú preferido</span>
+              <select name="menuType">
+                <option value="degustacion">Menú degustación</option>
+                <option value="clasico">Menú clásico</option>
+                <option value="infantil">Menú infantil predominante</option>
+                <option value="chef">A definir con el chef</option>
+              </select>
+            </label>
+
+            <fieldset>
+              <legend>Bebidas incluidas</legend>
+              <div class="checkbox-grid">
+                <label><input type="checkbox" name="drinks" value="agua" class="drink-checkbox" /> Agua</label>
+                <label><input type="checkbox" name="drinks" value="gaseosas" class="drink-checkbox" /> Gaseosas</label>
+                <label><input type="checkbox" name="drinks" value="vinos" class="drink-checkbox" /> Vinos</label>
+                <label><input type="checkbox" name="drinks" value="champagne" class="drink-checkbox" /> Champagne</label>
+                <label><input type="checkbox" name="drinks" value="sin_alcohol" class="drink-checkbox" /> Sin alcohol</label>
+              </div>
+              <small class="note">Selecciona al menos una bebida.</small>
+            </fieldset>
+
+            <label class="field checkbox-field hidden" id="waiterField">
+              <input type="checkbox" name="waiterService" />
+              <span>Necesita servicio de mozos</span>
+            </label>
+
+            <label class="field checkbox-field hidden" id="furnitureField">
+              <input type="checkbox" name="furniture" />
+              <span>Necesita mobiliario: mesas y sillas</span>
+            </label>
+
+            <label class="field">
+              <span>Cómo nos conoció</span>
+              <select name="referralSource">
+                <option value="redes">Redes sociales</option>
+                <option value="recomendacion">Recomendación</option>
+                <option value="busqueda">Búsqueda web</option>
+                <option value="cliente">Fue cliente antes</option>
+                <option value="otro">Otro</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="form-section">
+            <div class="section-title">
+              <span>Sección D</span>
+              <h3>Observaciones y confirmación</h3>
+            </div>
+
+            <label class="field">
+              <span>Observaciones o pedidos especiales</span>
+              <textarea name="observations" maxlength="350" rows="4" placeholder="Escribe aquí tus comentarios"></textarea>
+              <small class="counter" id="observationsCounter">0 / 350</small>
+            </label>
+
+            <label class="field checkbox-field">
+              <input type="checkbox" name="acceptContact" required />
+              <span>Acepto que BuenSabor se contacte para confirmar disponibilidad</span>
+            </label>
+            <label class="field checkbox-field">
+              <input type="checkbox" name="acceptTerms" required />
+              <span>Acepto los <a href="#" class="link-inline">Términos y Condiciones</a></span>
+            </label>
+            <label class="field checkbox-field">
+              <input type="checkbox" name="acceptPrivacy" required />
+              <span>Acepto la Política de Privacidad</span>
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Enviar solicitud</button>
+            <button type="reset" class="btn btn-secondary">Limpiar</button>
+          </div>
+          <div class="back-link">
+            <a href="index.html">Volver al inicio</a>
+          </div>
+        </form>
+      </section>
     </main>
 
     <footer class="site-footer">
       <p>&copy; 2026 BuenSabor Restaurante y Catering.</p>
+      <div class="social-links">
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">WhatsApp</a>
+      </div>
     </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const requestForm = document.getElementById('requestForm');
+        const requestTypeRadios = Array.from(document.querySelectorAll('input[name="requestType"]'));
+        const durationField = document.getElementById('durationField');
+        const eventNameField = document.getElementById('eventNameField');
+        const eventTypeField = document.getElementById('eventTypeField');
+        const eventTypeOtherField = document.getElementById('eventTypeOtherField');
+        const eventLocationField = document.getElementById('eventLocationField');
+        const eventTypeSelect = document.getElementById('eventTypeSelect');
+        const dietOtherCheckbox = document.getElementById('dietOtherCheckbox');
+        const dietOtherField = document.getElementById('dietOtherField');
+        const dietOtherCounter = document.getElementById('dietOtherCounter');
+        const kidsMenuCheckbox = document.getElementById('kidsMenuCheckbox');
+        const kidsMenuCountField = document.getElementById('kidsMenuCountField');
+        const waiterField = document.getElementById('waiterField');
+        const furnitureField = document.getElementById('furnitureField');
+        const observationsCounter = document.getElementById('observationsCounter');
+        const observationsTextarea = requestForm.querySelector('textarea[name="observations"]');
+        const drinkCheckboxes = Array.from(document.querySelectorAll('.drink-checkbox'));
+
+        function updateRequestType() {
+          const isCatering = document.querySelector('input[name="requestType"]:checked').value === 'catering';
+          durationField.classList.toggle('hidden', !isCatering);
+          eventNameField.classList.toggle('hidden', !isCatering);
+          eventTypeField.classList.toggle('hidden', !isCatering);
+          eventLocationField.classList.toggle('hidden', !isCatering);
+          waiterField.classList.toggle('hidden', !isCatering);
+          furnitureField.classList.toggle('hidden', !isCatering);
+
+          const inputsToToggle = [
+            durationField.querySelector('select'),
+            eventNameField.querySelector('input'),
+            eventTypeField.querySelector('select'),
+            eventLocationField.querySelector('input'),
+            waiterField.querySelector('input'),
+            furnitureField.querySelector('input')
+          ];
+
+          inputsToToggle.forEach((input) => {
+            if (input) {
+              input.required = isCatering && (input.name === 'eventName' || input.name === 'eventLocation' || input.name === 'duration' || input.name === 'eventType');
+            }
+          });
+        }
+
+        function updateEventTypeOther() {
+          const isOther = eventTypeSelect.value === 'otro';
+          eventTypeOtherField.classList.toggle('hidden', !isOther);
+          const otherInput = eventTypeOtherField.querySelector('input');
+          if (otherInput) otherInput.required = isOther;
+        }
+
+        function updateDietOther() {
+          dietOtherField.classList.toggle('hidden', !dietOtherCheckbox.checked);
+          const textarea = dietOtherField.querySelector('textarea');
+          if (textarea) textarea.required = dietOtherCheckbox.checked;
+        }
+
+        function updateKidsMenuCount() {
+          kidsMenuCountField.classList.toggle('hidden', !kidsMenuCheckbox.checked);
+          const input = kidsMenuCountField.querySelector('input');
+          if (input) input.required = kidsMenuCheckbox.checked;
+        }
+
+        function updateCounter(textarea, counter) {
+          counter.textContent = `${textarea.value.length} / ${textarea.maxLength}`;
+        }
+
+        function validateDrinks() {
+          const anyChecked = drinkCheckboxes.some((checkbox) => checkbox.checked);
+          const fieldset = drinkCheckboxes[0].closest('fieldset');
+          if (fieldset) {
+            if (!anyChecked) {
+              fieldset.classList.add('invalid');
+            } else {
+              fieldset.classList.remove('invalid');
+            }
+          }
+          return anyChecked;
+        }
+
+        requestTypeRadios.forEach((radio) => radio.addEventListener('change', updateRequestType));
+        eventTypeSelect.addEventListener('change', updateEventTypeOther);
+        dietOtherCheckbox.addEventListener('change', updateDietOther);
+        kidsMenuCheckbox.addEventListener('change', updateKidsMenuCount);
+        observationsTextarea.addEventListener('input', function () { updateCounter(observationsTextarea, observationsCounter); });
+        const dietOtherTextarea = requestForm.querySelector('textarea[name="dietOtherDetails"]');
+        if (dietOtherTextarea) {
+          dietOtherTextarea.addEventListener('input', function () { updateCounter(dietOtherTextarea, dietOtherCounter); });
+        }
+
+        drinkCheckboxes.forEach((checkbox) => {
+          checkbox.addEventListener('change', validateDrinks);
+        });
+
+        requestForm.addEventListener('submit', function (event) {
+          if (!validateDrinks()) {
+            event.preventDefault();
+            alert('Por favor selecciona al menos una bebida incluida.');
+          }
+        });
+
+        updateRequestType();
+        updateEventTypeOther();
+        updateDietOther();
+        updateKidsMenuCount();
+        updateCounter(observationsTextarea, observationsCounter);
+        if (dietOtherTextarea) updateCounter(dietOtherTextarea, dietOtherCounter);
+      });
+    </script>
   </body>
 </html>
