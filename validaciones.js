@@ -20,6 +20,13 @@ document.addEventListener('DOMContentLoaded', function () {
   const fieldInputs = Array.from(form.querySelectorAll('input, select, textarea'));
   const drinkCheckboxes = Array.from(document.querySelectorAll('.drink-checkbox'));
   const requestFieldset = form.querySelector('fieldset');
+  let validationMessages = [];
+
+  function addValidationError(message) {
+    if (!validationMessages.includes(message)) {
+      validationMessages.push(message);
+    }
+  }
 
   function isCatering() {
     return form.querySelector('input[name="requestType"]:checked')?.value === 'catering';
@@ -46,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
       input.classList.remove('campo-error', 'campo-ok');
     });
     form.querySelectorAll('fieldset').forEach((fieldset) => fieldset.classList.remove('invalid'));
+    validationMessages = [];
   }
 
   function updateRequestType() {
@@ -116,6 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (!dateInput.value || !selectedDate) {
       addValidationClass(dateInput, false);
+      addValidationError('Faltan campos obligatorios por completar.');
       valid = false;
     } else {
       const startDate = new Date(selectedDate.getTime());
@@ -130,6 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (selectedDate < minDate) {
         addValidationClass(dateInput, false);
+        addValidationError('La fecha debe respetar el plazo mínimo según el tipo de solicitud.');
         valid = false;
       } else {
         addValidationClass(dateInput, true);
@@ -140,6 +150,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const parsedTime = parseTime(timeValue);
     if (!timeValue || !parsedTime) {
       addValidationClass(timeInput, false);
+      addValidationError('Faltan campos obligatorios por completar.');
       valid = false;
     } else if (!isCatering()) {
       const { hours, minutes } = parsedTime;
@@ -223,6 +234,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const element = form.querySelector(selector);
       if (element && !element.value.trim()) {
         addValidationClass(element, false);
+        addValidationError('Faltan campos obligatorios por completar.');
         valid = false;
       } else if (element) {
         addValidationClass(element, true);
@@ -233,6 +245,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const emailConfirmValue = form.elements.emailConfirm.value.trim();
     if (emailValue && emailConfirmValue && emailValue !== emailConfirmValue) {
       addValidationClass(form.elements.emailConfirm, false);
+      addValidationError('Los correos electrónicos no coinciden.');
       valid = false;
     }
 
@@ -254,6 +267,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (!Number.isInteger(adultsValue) || adultsValue < 1 || adultsValue > maxAdults) {
       addValidationClass(adultsInput, false);
+      addValidationError(`Cantidad de adultos inválida. Debe ser al menos 1 y como máximo ${maxAdults}.`);
       valid = false;
     } else {
       addValidationClass(adultsInput, true);
@@ -261,6 +275,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (!Number.isInteger(childrenValue) || childrenValue < 0 || childrenValue > 50 || childrenValue > adultsValue) {
       addValidationClass(childrenInput, false);
+      addValidationError('Cantidad de menores inválida. Debe ser un número entre 0 y 50 y no puede superar la cantidad de adultos.');
       valid = false;
     } else {
       addValidationClass(childrenInput, true);
@@ -269,6 +284,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (dietOtherCheckbox.checked) {
       if (!dietOtherDetails || !dietOtherDetails.value.trim() || dietOtherDetails.value.trim().length > 200) {
         addValidationClass(dietOtherDetails, false);
+        addValidationError('Detalle otras restricciones requerido y no puede superar 200 caracteres.');
         valid = false;
       } else {
         addValidationClass(dietOtherDetails, true);
@@ -381,7 +397,21 @@ document.addEventListener('DOMContentLoaded', function () {
       if (firstError) {
         firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
-      alert('Hay campos con informaci�n inv�lida. Revisa las secciones destacadas.');
+      const message = validationMessages.length > 0
+        ? validationMessages.join('\n')
+        : 'Hay campos con información inválida. Revisa las secciones destacadas.';
+      alert(message);
+    } else {
+      event.preventDefault();
+      alert('Solicitud enviada correctamente. ¡Gracias!');
+      form.reset();
+      updateRequestType();
+      updateEventTypeOther();
+      updateDietOther();
+      updateKidsMenuCount();
+      updateCounter(observationsTextarea, observationsCounter);
+      const dietOtherTextarea = form.querySelector('textarea[name="dietOtherDetails"]');
+      if (dietOtherTextarea) updateCounter(dietOtherTextarea, dietOtherCounter);
     }
   });
 
