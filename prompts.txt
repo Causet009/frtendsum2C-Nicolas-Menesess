@@ -1,0 +1,32 @@
+﻿Registro de interacciones con GitHub Copilot
+
+Etapa 1 - Estructura inicial del sitio
+Empecé pidiéndole a Copilot que generara la página principal de BuenSabor con los archivos básicos `index.html` y `styles.css`.
+Le pedí que la hiciera por partes y construyera un home con navegación, hero, propuesta gastronómica y llamada a la acción hacia el formulario.
+Copilot me entregó una estructura inicial que revisé y ajusté para que quedara con un estilo claro y funcional.
+
+Etapa 2 - Barra de navegación y contenido principal
+Después pedí que la barra de navegación incluyera los enlaces: Inicio, Menú, Catering, Nosotros y Solicitar.
+También solicité un hero con imagen de fondo, título, slogan y dos botones: "Ver menú" y "Solicitar reserva o catering".
+Copilot añadió la sección de menú destacado con seis platos y etiquetas de restricción alimentaria, y la sección de catering con cuatro tipos de eventos.
+Revisé los textos y corregí detalles para que el contenido fuera coherente con el restaurante BuenSabor.
+
+Etapa 3 - Formulario de solicitud
+Pedí crear `solicitud.html` con un formulario dividido en cuatro secciones claramente diferenciadas.
+Expliqué que debía tener tipo de solicitud, datos del evento, datos de comensales, datos del cliente y confirmación.
+Copilot generó el HTML del formulario con campos dinámicos, `fieldset`, `legend`, `label`, y el script necesario para mostrar/ocultar campos según si la solicitud era reserva o catering.
+
+Etapa 4 - Diseño y validación visual
+Solicité que el formulario estuviera centrado, con ancho máximo, diseño responsive y secciones visualmente separadas.
+Le pedí agregar efectos de foco en los campos y preparar clases `campo-error` y `campo-ok` para validación futura.
+Copilot mejoró los estilos y yo verifiqué que los campos requeridos tuvieran asterisco y las secciones quedaran bien organizadas.
+
+Etapa 5 - Correcciones de texto y documentación
+Noté que algunos textos tenían caracteres incorrectos debido a acentos, así que pedí que los corrigiera en el HTML.
+También pedí agregar redes sociales ficticias en el footer para completar el diseño.
+Además aprendí que el archivo `prompts.txt` debe existir en el repositorio antes de la entrega.
+
+Reflexión personal
+Usé Copilot como un asistente para generar estructuras y sugerencias de código, pero siempre revisé y ajusté el resultado con mis propias palabras.
+No copié respuestas literales: cada cambio lo propuse yo y comprobé que el HTML y CSS quedaran bien.
+Esta experiencia me enseñó a plantear preguntas concretas, pedir mejoras por etapas y documentar el proceso en `prompts.txt`.
