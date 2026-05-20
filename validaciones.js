@@ -239,17 +239,62 @@ document.addEventListener('DOMContentLoaded', function () {
     return valid;
   }
 
-  function validateDrinks() {
-    const anyChecked = drinkCheckboxes.some((checkbox) => checkbox.checked);
-    const fieldset = drinkCheckboxes[0]?.closest('fieldset');
+  function validateSectionB() {
+    let valid = true;
 
-    if (!anyChecked && fieldset) {
-      fieldset.classList.add('invalid');
-    } else if (fieldset) {
-      fieldset.classList.remove('invalid');
+    const adultsInput = form.elements.adults;
+    const childrenInput = form.elements.children;
+    const dietOtherDetails = form.elements.dietOtherDetails;
+    const kidsMenuCountInput = form.elements.kidsMenuCount;
+
+    const adultsValue = Number(adultsInput.value);
+    const childrenValue = Number(childrenInput.value);
+    const isCateringRequest = isCatering();
+    const maxAdults = isCateringRequest ? 200 : 20;
+
+    if (!Number.isInteger(adultsValue) || adultsValue < 1 || adultsValue > maxAdults) {
+      addValidationClass(adultsInput, false);
+      valid = false;
+    } else {
+      addValidationClass(adultsInput, true);
     }
 
-    return anyChecked;
+    if (!Number.isInteger(childrenValue) || childrenValue < 0 || childrenValue > 50 || childrenValue > adultsValue) {
+      addValidationClass(childrenInput, false);
+      valid = false;
+    } else {
+      addValidationClass(childrenInput, true);
+    }
+
+    if (dietOtherCheckbox.checked) {
+      if (!dietOtherDetails || !dietOtherDetails.value.trim() || dietOtherDetails.value.trim().length > 200) {
+        addValidationClass(dietOtherDetails, false);
+        valid = false;
+      } else {
+        addValidationClass(dietOtherDetails, true);
+      }
+    } else if (dietOtherDetails) {
+      addValidationClass(dietOtherDetails, true);
+    }
+
+    if (kidsMenuCheckbox.checked) {
+      const kidsMenuCountValue = Number(kidsMenuCountInput.value);
+      if (
+        !Number.isInteger(kidsMenuCountValue) ||
+        kidsMenuCountValue < 1 ||
+        kidsMenuCountValue > childrenValue ||
+        childrenValue < 1
+      ) {
+        addValidationClass(kidsMenuCountInput, false);
+        valid = false;
+      } else {
+        addValidationClass(kidsMenuCountInput, true);
+      }
+    } else if (kidsMenuCountInput) {
+      addValidationClass(kidsMenuCountInput, true);
+    }
+
+    return valid;
   }
 
   function validateAccepted() {
@@ -288,6 +333,7 @@ document.addEventListener('DOMContentLoaded', function () {
       validateRequestType(),
       validateDateTime(),
       validateCateringFields(),
+      validateSectionB(),
       validateRequiredFields(),
       validateDrinks(),
       validateAccepted(),
@@ -335,7 +381,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (firstError) {
         firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
-      alert('Hay campos con información inválida. Revisa las secciones destacadas.');
+      alert('Hay campos con informaciï¿½n invï¿½lida. Revisa las secciones destacadas.');
     }
   });
 
