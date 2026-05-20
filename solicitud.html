@@ -45,17 +45,17 @@
 
             <div class="field-grid">
               <label class="field">
-                <span>Fecha del evento o reserva</span>
+                <span>Fecha del evento o reserva<span class="required">*</span></span>
                 <input type="date" name="eventDate" required />
               </label>
               <label class="field">
-                <span>Hora de inicio</span>
+                <span>Hora de inicio<span class="required">*</span></span>
                 <input type="time" name="eventTime" required />
               </label>
             </div>
 
             <label class="field hidden" id="durationField">
-              <span>Duración estimada del evento</span>
+              <span>Duración estimada del evento<span class="required">*</span></span>
               <select name="duration">
                 <option value="1">1 hora</option>
                 <option value="2">2 horas</option>
@@ -66,12 +66,12 @@
             </label>
 
             <label class="field hidden" id="eventNameField">
-              <span>Nombre o descripción del evento</span>
+              <span>Nombre o descripción del evento<span class="required">*</span></span>
               <input type="text" name="eventName" placeholder="Cumpleaños de 50, Reunión anual de empresa" />
             </label>
 
             <label class="field hidden" id="eventTypeField">
-              <span>Tipo de evento</span>
+              <span>Tipo de evento<span class="required">*</span></span>
               <select name="eventType" id="eventTypeSelect">
                 <option value="">Selecciona...</option>
                 <option value="casamiento">Casamiento</option>
@@ -83,12 +83,12 @@
             </label>
 
             <label class="field hidden" id="eventTypeOtherField">
-              <span>Especifica el tipo de evento</span>
+              <span>Especifica el tipo de evento<span class="required">*</span></span>
               <input type="text" name="eventTypeOther" placeholder="Describe el evento" />
             </label>
 
             <label class="field hidden" id="eventLocationField">
-              <span>Lugar del evento</span>
+              <span>Lugar del evento<span class="required">*</span></span>
               <input type="text" name="eventLocation" placeholder="Dirección donde se realizará el servicio" />
             </label>
           </div>
@@ -101,7 +101,7 @@
 
             <div class="field-grid">
               <label class="field">
-                <span>Cantidad de adultos</span>
+                <span>Cantidad de adultos<span class="required">*</span></span>
                 <input type="number" name="adults" min="1" max="200" value="1" required />
               </label>
               <label class="field">
@@ -134,7 +134,7 @@
             </label>
 
             <label class="field hidden" id="kidsMenuCountField">
-              <span>Cantidad de menús infantiles</span>
+              <span>Cantidad de menús infantiles<span class="required">*</span></span>
               <input type="number" name="kidsMenuCount" min="1" max="50" value="1" />
             </label>
           </div>
@@ -147,22 +147,22 @@
 
             <div class="field-grid">
               <label class="field">
-                <span>Nombre completo</span>
+                <span>Nombre completo<span class="required">*</span></span>
                 <input type="text" name="fullName" required />
               </label>
               <label class="field">
-                <span>Correo electrónico</span>
+                <span>Correo electrónico<span class="required">*</span></span>
                 <input type="email" name="email" required />
               </label>
             </div>
 
             <div class="field-grid">
               <label class="field">
-                <span>Confirmar correo electrónico</span>
+                <span>Confirmar correo electrónico<span class="required">*</span></span>
                 <input type="email" name="emailConfirm" required />
               </label>
               <label class="field">
-                <span>Teléfono de contacto</span>
+                <span>Teléfono de contacto<span class="required">*</span></span>
                 <input type="tel" name="phone" placeholder="Ej. 11 1234 5678" required />
               </label>
             </div>
@@ -178,7 +178,7 @@
             </label>
 
             <fieldset>
-              <legend>Bebidas incluidas</legend>
+              <legend>Bebidas incluidas <span class="required">*</span></legend>
               <div class="checkbox-grid">
                 <label><input type="checkbox" name="drinks" value="agua" class="drink-checkbox" /> Agua</label>
                 <label><input type="checkbox" name="drinks" value="gaseosas" class="drink-checkbox" /> Gaseosas</label>
@@ -225,15 +225,15 @@
 
             <label class="field checkbox-field">
               <input type="checkbox" name="acceptContact" required />
-              <span>Acepto que BuenSabor se contacte para confirmar disponibilidad</span>
+              <span>Acepto que BuenSabor se contacte para confirmar disponibilidad<span class="required">*</span></span>
             </label>
             <label class="field checkbox-field">
               <input type="checkbox" name="acceptTerms" required />
-              <span>Acepto los <a href="#" class="link-inline">Términos y Condiciones</a></span>
+              <span>Acepto los <a href="#" class="link-inline">Términos y Condiciones</a><span class="required">*</span></span>
             </label>
             <label class="field checkbox-field">
               <input type="checkbox" name="acceptPrivacy" required />
-              <span>Acepto la Política de Privacidad</span>
+              <span>Acepto la Política de Privacidad<span class="required">*</span></span>
             </label>
           </div>
 
