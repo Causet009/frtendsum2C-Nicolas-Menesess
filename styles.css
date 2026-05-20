@@ -305,6 +305,24 @@ img {
   color: var(--muted);
 }
 
+.social-links {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.social-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.social-links a:hover {
+  color: var(--primary);
+}
+
 @media (max-width: 900px) {
   .hero {
     min-height: 70vh;
